@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>3D Tennis Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Game Container - Square aspect ratio -->
+    <div id="tennis-game">
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Overlay -->
+        <div class="game-ui">
+            <!-- Score Display -->
+            <div class="score-container">
+                <div class="score-box">
+                    <div class="score-label">YOU</div>
+                    <div class="score-value" id="player-score">0</div>
+                </div>
+                <div class="score-box">
+                    <div class="score-label">CPU</div>
+                    <div class="score-value" id="opponent-score">0</div>
+                </div>
+            </div>
+
+            <!-- Game Message -->
+            <div id="game-message"></div>
+
+            <!-- Control Buttons -->
+            <div class="control-buttons">
+                <button id="settings-btn" class="control-btn">⚙️</button>
+                <button id="pause-btn" class="control-btn">⏸️</button>
+            </div>
+
+            <!-- Touch Control Hint -->
+            <div id="touch-hint" class="hint">
+                Drag to move • Tap to hit
+            </div>
+        </div>
+
+        <!-- Settings Modal -->
+        <div id="settings-modal" class="modal hidden">
+            <div class="modal-content">
+                <h2>Settings</h2>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="auto-aim-toggle" checked>
+                        <span>Auto-Aim</span>
+                    </label>
+                    <div class="setting-description">Automatically aims shots toward opponent's court</div>
+                </div>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="auto-timing-toggle" checked>
+                        <span>Auto-Timing</span>
+                    </label>
+                    <div class="setting-description">Enlarges hit window for easier returns</div>
+                </div>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="movement-assist-toggle" checked>
+                        <span>Movement Assist</span>
+                    </label>
+                    <div class="setting-description">Helps position player for incoming balls</div>
+                </div>
+
+                <div class="setting-item">
+                    <label for="difficulty-select">AI Difficulty</label>
+                    <select id="difficulty-select">
+                        <option value="easy">Easy</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="hard">Hard</option>
+                    </select>
+                </div>
+
+                <div class="setting-item">
+                    <label>
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span>Sound Effects</span>
+                    </label>
+                </div>
+
+                <div class="modal-buttons">
+                    <button id="close-settings-btn" class="btn btn-primary">Close</button>
+                    <button id="restart-btn" class="btn btn-secondary">Restart Game</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Start Screen -->
+        <div id="start-screen">
+            <div class="start-content">
+                <h1>🎾 3D Tennis</h1>
+                <p class="subtitle">First to 11 points wins!</p>
+                <div id="loading-indicator" style="margin: 20px 0;">
+                    <div style="font-size: 14px; color: #aaa;">Loading game...</div>
+                </div>
+                <button id="start-btn" class="btn btn-large" style="display: none;">Start Game</button>
+                <div class="controls-info">
+                    <div><strong>Mobile:</strong> Touch & drag to move, Tap to hit</div>
+                    <div><strong>Desktop:</strong> Arrow Keys/A-D to move, Space to hit</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="tennis.js"></script>
+</body>
+</html>

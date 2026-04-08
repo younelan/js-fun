@@ -1,0 +1,428 @@
+/* All styles scoped within #tennis-game */
+
+#tennis-game {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto;
+    background: #1a1a2e;
+    overflow: hidden;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+#tennis-game * {
+    box-sizing: border-box;
+}
+
+#tennis-game #gameCanvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+
+/* UI Overlay */
+#tennis-game .game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 10;
+}
+
+#tennis-game .game-ui > * {
+    pointer-events: auto;
+}
+
+/* Score Container */
+#tennis-game .score-container {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 30px;
+    pointer-events: none;
+}
+
+#tennis-game .score-box {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+#tennis-game .score-label {
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+#tennis-game .score-value {
+    color: #fff;
+    font-size: 32px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 5px;
+}
+
+/* Game Message */
+#tennis-game #game-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.9);
+    color: #fff;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+#tennis-game #game-message.show {
+    opacity: 1;
+}
+
+/* Control Buttons */
+#tennis-game .control-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+#tennis-game .control-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+}
+
+#tennis-game .control-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.05);
+}
+
+#tennis-game .control-btn:active {
+    transform: scale(0.95);
+}
+
+/* Touch Hint */
+#tennis-game .hint {
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 11px;
+    text-align: center;
+    backdrop-filter: blur(5px);
+    pointer-events: none;
+    z-index: 20;
+    max-width: 80%;
+    opacity: 0.8;
+}
+
+#tennis-game .hint div {
+    margin: 3px 0;
+    line-height: 1.3;
+}
+
+/* Touch indicator (visual feedback) */
+#tennis-game .touch-indicator {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    display: none;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent);
+}
+
+#tennis-game .touch-indicator.active {
+    display: block;
+    animation: touchPulse 0.6s ease-out;
+}
+
+@keyframes touchPulse {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scoreUpdate {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.3);
+        color: #4CAF50;
+        text-shadow: 0 0 20px rgba(76, 175, 80, 0.8);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Modal */
+#tennis-game .modal {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+#tennis-game .modal.hidden {
+    display: none;
+}
+
+#tennis-game .modal-content {
+    background: #2a2a3e;
+    color: #fff;
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 400px;
+    width: 90%;
+    max-height: 90%;
+    overflow-y: auto;
+}
+
+#tennis-game .modal-content h2 {
+    margin: 0 0 20px 0;
+    font-size: 24px;
+    text-align: center;
+}
+
+#tennis-game .setting-item {
+    margin-bottom: 20px;
+}
+
+#tennis-game .setting-item label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+#tennis-game .setting-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+#tennis-game .setting-item select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    background: #1a1a2e;
+    color: #fff;
+    border: 1px solid #444;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#tennis-game .setting-description {
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 5px;
+    margin-left: 30px;
+}
+
+#tennis-game .modal-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 30px;
+}
+
+#tennis-game .btn {
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#tennis-game .btn-primary {
+    background: #4CAF50;
+    color: #fff;
+}
+
+#tennis-game .btn-primary:hover {
+    background: #45a049;
+    transform: translateY(-2px);
+}
+
+#tennis-game .btn-secondary {
+    background: #555;
+    color: #fff;
+}
+
+#tennis-game .btn-secondary:hover {
+    background: #666;
+    transform: translateY(-2px);
+}
+
+#tennis-game .btn:active {
+    transform: translateY(0);
+}
+
+/* Start Screen */
+#tennis-game #start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+}
+
+#tennis-game #start-screen.hidden {
+    display: none;
+}
+
+#tennis-game .start-content {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+}
+
+#tennis-game .start-content h1 {
+    font-size: 48px;
+    margin: 0 0 10px 0;
+}
+
+#tennis-game .start-content .subtitle {
+    font-size: 18px;
+    color: #aaa;
+    margin: 0 0 30px 0;
+}
+
+#tennis-game .btn-large {
+    padding: 16px 48px;
+    font-size: 20px;
+    background: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-weight: 600;
+}
+
+#tennis-game .btn-large:hover {
+    background: #45a049;
+    transform: scale(1.05);
+}
+
+#tennis-game .btn-large:active {
+    transform: scale(0.95);
+}
+
+#tennis-game .controls-info {
+    margin-top: 30px;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 1.6;
+}
+
+#tennis-game .controls-info div {
+    margin: 5px 0;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 600px) {
+    #tennis-game .score-container {
+        gap: 15px;
+    }
+
+    #tennis-game .score-box {
+        padding: 8px 15px;
+    }
+
+    #tennis-game .score-value {
+        font-size: 24px;
+    }
+
+    #tennis-game .control-buttons {
+        top: 10px;
+        right: 10px;
+    }
+
+    #tennis-game .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+    }
+
+    #tennis-game #game-message {
+        font-size: 18px;
+        padding: 15px 30px;
+    }
+
+    #tennis-game .start-content h1 {
+        font-size: 36px;
+    }
+
+    #tennis-game .modal-content {
+        padding: 20px;
+    }
+}
