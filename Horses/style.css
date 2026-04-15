@@ -1,0 +1,220 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: radial-gradient(ellipse at center, #1b5e20 0%, #0d3d0f 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 12px;
+}
+
+#app {
+    width: 100%;
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+h1 {
+    color: #f4e5a1;
+    font-size: clamp(1.4rem, 5vw, 2.2rem);
+    font-weight: 900;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+    letter-spacing: 1px;
+}
+
+#board-wrap {
+    width: 100%;
+    max-width: 600px;
+    aspect-ratio: 1;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    border: 4px solid #d4af37;
+    background: #fff;
+}
+
+#board {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+#controls {
+    width: 100%;
+    background: rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid rgba(255,255,255,0.2);
+}
+
+#status-bar {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    font-size: clamp(0.95rem, 3vw, 1.15rem);
+    color: #fff;
+    font-weight: 600;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 10px 18px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+#turn-label {
+    font-size: clamp(1rem, 3.5vw, 1.3rem);
+}
+
+#current-player-name {
+    font-size: 1.2em;
+    text-shadow: 0 0 10px currentColor;
+}
+
+#dice-result {
+    font-size: clamp(2rem, 7vw, 3rem);
+    min-width: 1.8em;
+    text-align: center;
+    transition: transform 0.1s;
+    display: inline-block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+#dice-result.rolling {
+    animation: diceRoll 0.65s linear infinite;
+}
+
+#dice-result.landed {
+    animation: diceLand 0.35s ease-out;
+}
+
+@keyframes diceRoll {
+    0%   { transform: rotate(0deg) scale(1); }
+    25%  { transform: rotate(90deg) scale(1.15); }
+    50%  { transform: rotate(180deg) scale(0.9); }
+    75%  { transform: rotate(270deg) scale(1.15); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes diceLand {
+    0%   { transform: scale(1.5); }
+    60%  { transform: scale(0.85); }
+    100% { transform: scale(1); }
+}
+
+#roll-btn {
+    padding: 14px 36px;
+    font-size: clamp(1rem, 3.5vw, 1.25rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #d4af37 0%, #f4e5a1 50%, #d4af37 100%);
+    color: #1a3d0f;
+    border: 3px solid #a07c10;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    touch-action: manipulation;
+}
+
+#roll-btn:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(0,0,0,0.5); }
+#roll-btn:active { transform: scale(0.96); }
+#roll-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
+
+#message {
+    min-height: 1.4em;
+    font-size: clamp(0.9rem, 2.8vw, 1.05rem);
+    color: #ffe082;
+    font-weight: 700;
+    text-align: center;
+}
+
+#scores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    width: 100%;
+}
+
+.score-box {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+    border-radius: 10px;
+    padding: 8px 14px;
+    color: #fff;
+    font-weight: 700;
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    flex: 1 1 100px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.5);
+}
+
+.score-box.active {
+    background: rgba(255,255,255,0.28);
+    border-color: #f4e5a1;
+    box-shadow: 0 0 12px rgba(244,229,161,0.5);
+}
+
+/* Game over overlay */
+#game-over {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#game-over.hidden { display: none; }
+
+#game-over-box {
+    background: linear-gradient(135deg, #1b5e20, #2e7d32);
+    border: 4px solid #d4af37;
+    border-radius: 20px;
+    padding: 40px 50px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+
+#winner-text {
+    color: #f4e5a1;
+    font-size: clamp(1.6rem, 6vw, 2.8rem);
+    margin-bottom: 28px;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.5);
+}
+
+#restart-btn {
+    padding: 16px 44px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, #d4af37, #f4e5a1);
+    color: #1a3d0f;
+    border: 3px solid #a07c10;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    touch-action: manipulation;
+}
+
+#restart-btn:hover { transform: scale(1.07); }
+#restart-btn:active { transform: scale(0.95); }

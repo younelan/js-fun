@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <title>Jeu des Petits Chevaux</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <h1>🐴 Petits Chevaux</h1>
+
+        <div id="board-wrap">
+            <canvas id="board" width="600" height="600"></canvas>
+        </div>
+
+        <div id="controls">
+            <div id="status-bar">
+                <span id="turn-label">Tour : <strong id="current-player-name">Rouge</strong></span>
+                <span id="dice-result"></span>
+            </div>
+            <button id="roll-btn">🎲 Lancer le dé</button>
+            <div id="message"></div>
+        </div>
+
+        <div id="scores">
+            <div class="score-box" id="score-red"><span class="dot" style="background:#e53935"></span> Rouge <span>0</span>/4</div>
+            <div class="score-box" id="score-blue"><span class="dot" style="background:#1565c0"></span> Bleu <span>0</span>/4</div>
+            <div class="score-box" id="score-green"><span class="dot" style="background:#2e7d32"></span> Vert <span>0</span>/4</div>
+            <div class="score-box" id="score-yellow"><span class="dot" style="background:#f9a825"></span> Jaune <span>0</span>/4</div>
+        </div>
+
+        <div id="game-over" class="hidden">
+            <div id="game-over-box">
+                <h2 id="winner-text"></h2>
+                <button id="restart-btn">Rejouer</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
