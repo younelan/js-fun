@@ -21,6 +21,8 @@ local.properties
 local
 tmp
 data
+.agents
+data
 
 # External tool builders
 .externalToolBuilders/
