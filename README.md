@@ -11,24 +11,53 @@ This repo contains simple javascript games, most recreation of classic retro gam
 - **Frogger** - Simple frogger like implementation
 - **Platform** - Simple platformer like mario with coin and enemy
 - **Invaders** - space invaders like shoot them up
-- **Mines** - Classic Mine Sweeper game
+- **Sweep** - Classic Mine Sweeper game
 - **Memory** - Classic memory game, match 2 similar cards
 - **2048** - Classic 2048 game
 - **TicTacToe** - Simple Tic Tac Toe
 - **MatchN** - Simple Match N implementation (like jewels, candy crush etc)
-- **Cards** - Card Games, including Morocco's Classic Game of Ronda using Spanish Cards
+- **CardGames** - Card Games, including Morocco's Classic Game of Ronda using Spanish Cards
 - **Connect4** - Classic Connect 4 board game
-- **TicTacToe** - everyone played this in a classroom
 - **dotboxes** - classic paper game, played w/ paper and pens
-- **Monster** - monster chaser
 - **Tikming** - lemmings clone
-- **FallingBlocks**	- Tetris like game
-- NeoCity - like sim city
+- **NeoCity** - like sim city
 - **Missiles** - Missile Defender in the style of classic game Missile Command
 - **Pipes** - Simple Flowing pipes classic game like pipe mania, pipe dream and others
 - **Backgammon** - Classic Board Game
-- **Horses** Classic Board Game
+- **Horses** - Classic Board Game
 - **Pitfall** - Classic Atari Game
 - **BasketBall** - Unfinished 3D basketball game
-- **Invaders** - Space invaders
+- **7families** - Classic Card Game fishing for families
+- **AeroBlitz**
+- **Asteroids** - Classic Atari Game
+- **Battleship**
+- **Bubbles** - Bubble Bobble Like Implementation
+- **car**
+- **Centipede** - Arcade game where you shoot Aliens
+- **ChopperRescue** - Chop LIfter like game rescuing soldiers from battlefield
+- **Chroma**
+- **Civ**
+- **GoldRunner**
+- **HardHat**
+- **Hero**
+- **HorizontalScroll**
+- **IronDuel**
+- **karate**
+- **Kong**
+- **lode**
+- **Mastermind**
+- **McFlapFace**
+- **Miner**
+- **othello**
+- **Paperboy**
+- **PaulPosition** - Reimplementation of classic Car Game Pole Position
+- **Pinball** - Pinball Machine
+- **racer** - Match Racer From theAtari
+- **RiverPlane** - Classic Reimplementation of the Atari Game River Rade
+- **Rummy** - Card Game
+- **Slingshot** - Originally Gorilla this game has been implemented many times including as Candy Crush
+- **SpaceWars**
+- **submarine** - SubmarineCommander Like Game
+- **Tennis** - 3D Tennis using three js
+- **WhackAMole** - Classic Wackamole
 
